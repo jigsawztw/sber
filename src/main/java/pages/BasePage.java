@@ -35,7 +35,17 @@ public class BasePage {
     public void fillField(WebElement element, String value)  {
         element.clear();
         element.sendKeys(value);
-        element.sendKeys(org.openqa.selenium.Keys.TAB);
+        new org.openqa.selenium.interactions.Actions(BaseSteps.getDriver()).sendKeys(org.openqa.selenium.Keys.TAB).perform();
+        waitTimeOut(500);
+    }
+
+
+    public static void waitTimeOut(long timeout) {
+        try {
+            Thread.sleep(timeout);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

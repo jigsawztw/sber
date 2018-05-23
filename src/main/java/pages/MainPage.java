@@ -10,9 +10,6 @@ import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.*;
 public class MainPage extends BasePage{
 
-    @FindBy(xpath = "//a/span[@class='multiline']")
-    List<WebElement> menus;
-
     @FindBy(xpath = "//a[@class='kit-link kit-link_color_black alt-menu-list__link alt-menu-list__link_level_2']")
     List<WebElement> podmenus;
 
@@ -22,8 +19,6 @@ public class MainPage extends BasePage{
 
     @FindBy(xpath = "//a[@aria-label='Раздел Взять  кредит']")
     WebElement takeCredit;
-    @FindBy(xpath = "//div[@class='sbrf-div-list-wrapper bp-container bp-ui-dragRoot row with_gutter']//h2")
-    WebElement kakpol;
 
     @FindBy(xpath = "//h4/a[contains(text(), ' Сервис безопасных расчетов')]")
     WebElement bottom;

@@ -22,19 +22,11 @@ public class CalcPage  extends BasePage{
     @FindBy(xpath = "//input[@class='dcCalc_textfield__input']")
     WebElement select;
 
-
-    @FindBy(xpath = "//*[text()='Покупка квартиры в новостройке']")
-    WebElement buy_new_house;
-
-
     @FindBy(xpath = "//input[@id='initialFee']")
     WebElement initialFee;
 
     @FindBy(xpath = "//input[@id='creditTerm']")
     WebElement creditTerm;
-
-
-
 
     @FindBy(xpath = "//span[@class='dcCalc_switch__control']")
     List<WebElement> boxes;
@@ -59,14 +51,13 @@ public class CalcPage  extends BasePage{
     }
 
     public void selectCreditReason(String valueOfOption){
-        try{
-            Thread.sleep(1000);
-        }
-        catch (InterruptedException e){}
-        wait.until(ExpectedConditions.visibilityOf(select));
-      wait.until(ExpectedConditions.elementToBeClickable(select)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(buy_new_house)).click();
 
+        ((org.openqa.selenium.JavascriptExecutor)BaseSteps.getDriver()).executeScript("arguments[0].scrollIntoView(false);", select);
+        new org.openqa.selenium.interactions.Actions(BaseSteps.getDriver()).moveToElement(select).perform();
+        wait.until(ExpectedConditions.visibilityOf(select));
+        wait.until(ExpectedConditions.elementToBeClickable(select)).click();
+        wait.until(ExpectedConditions.visibilityOf(
+                BaseSteps.getDriver().findElement(org.openqa.selenium.By.xpath("//*[text()='" + valueOfOption + "']")))).click();
     }
 
     public void selectEastCost(String value){
@@ -75,9 +66,8 @@ public class CalcPage  extends BasePage{
     }
 
     public void selectInitialFree(String value){
-        wait.until(ExpectedConditions.textToBe(org.openqa.selenium.By.xpath("//span[@data-test-id='amountOfCredit']"), "5 000 000 \u20BD"));
-        wait.until(ExpectedConditions.visibilityOf(initialFee));
-        fillField(initialFee,value);
+            wait.until(ExpectedConditions.elementToBeClickable(initialFee));
+            fillField(initialFee,value);
 
     }
 
@@ -90,13 +80,8 @@ public class CalcPage  extends BasePage{
        for(int i=0;i<boxes.size();i++){
            if(i%2==1||i==1){
                boxes.get(i).click();
-               try{
-                   Thread.sleep(1000);
-               }
-               catch (InterruptedException e){}
-           }
-       }
-        }
+               waitTimeOut(1000);
+        }}}
 
     public void checkSumm(String sum){
         wait.until(ExpectedConditions.visibilityOf(summa));
